@@ -11,27 +11,27 @@ const imgResources: Resource[] = [
 export class Game {
     readonly canvas: Canvas;
     readonly images: Record<string, ImgResource>;
+    readonly fps: number;
 
-    constructor(canvas: Canvas) {
+    constructor(canvas: Canvas, fps: number) {
         this.canvas = canvas;
         this.images = {};
+        this.fps = fps;
     }
 
     run() {
         this.preload().catch(() => {
             console.error("Failed to load assets");
         }).then(() => {
-            const fps = 5;
             let scene = new TestScene(this);
             let earlier = Date.now();
 
             setInterval(() => {
-                let delta = Date.now() - earlier;
-
                 // Clear and repaint
                 this.canvas.ctx.clearRect(0, 0, this.canvas.w, this.canvas.h);
-                scene.update(delta);
-            }, 1000.0 / fps);
+                scene.update(Date.now() - earlier);
+                earlier = Date.now();
+            }, 1000.0 / this.fps);
         });
     }
 

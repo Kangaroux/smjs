@@ -15,8 +15,6 @@ export class TestScene implements Scene {
             new Img(game.images["ReceptorGlow"]),
         ]);
 
-        this.imgGroup.getPos().add(100, 50);
-
         let nextX = 0;
 
         for (let i = 0; i < this.imgGroup.length; i++) {
@@ -28,6 +26,11 @@ export class TestScene implements Scene {
     }
 
     update(deltaTime: number) {
+        let pos = this.imgGroup.getPos();
+        pos.x += (300 * deltaTime / 1000.0);
+
+        if (pos.x > 300) pos.x = 0;
+
         this.imgGroup.draw(this.game.canvas);
     }
 }
