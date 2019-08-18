@@ -1,4 +1,6 @@
-export class Point {
+import { Cloneable } from "./cloneable";
+
+export class Point implements Cloneable<Point> {
     x: number;
     y: number;
 
@@ -8,18 +10,41 @@ export class Point {
     }
 
     /**
-     * Returns a new point with the x and y values of p added to this
+     * Adds another point's x and y to this point
      */
     addPoint(p: Point): Point {
-        return new Point(this.x + p.x, this.y + p.y);
+        this.x += p.x;
+        this.y += p.y;
+
+        return this;
     }
 
+    /**
+     * Adds x and y to this point
+     */
     add(x: number, y: number): Point {
-        return new Point(this.x + x, this.y + y);
+        this.x += x;
+        this.y += y;
+
+        return this;
+    }
+
+    /**
+     * Returns a rect at this point with zero width and height
+     */
+    asRect(): Rect {
+        return new Rect(this.x, this.y, 0, 0);
+    }
+
+    /**
+     * Returns a copy of this point
+     */
+    clone(): Point {
+        return new Point(this.x, this.y);
     }
 }
 
-export class Rect extends Point {
+export class Rect extends Point implements Cloneable<Rect> {
     w: number;
     h: number;
 
@@ -51,5 +76,12 @@ export class Rect extends Point {
 
     bottomRight(): Point {
         return new Point(this.x2(), this.y2());
+    }
+
+    /**
+     * Returns a copy of this rect
+     */
+    clone(): Rect {
+        return new Rect(this.x, this.y, this.w, this.h);
     }
 }
