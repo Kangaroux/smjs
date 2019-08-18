@@ -3,7 +3,5 @@ services:
   nginx:
     build:
       context: ./nginx
-    volumes:
-      - ./client/build:/app/client
     ports:
       - "8080:80"
