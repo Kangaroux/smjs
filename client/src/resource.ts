@@ -1,32 +1,46 @@
+export interface Loadable<T> {
+    load(): Promise<T>;
+}
+
 /**
  * An image loaded into memory. ImageResource represents the data of the image
  * whereas Image represents an instance of the image
  */
-export class ImgResource {
-    readonly img: HTMLImageElement;
+export class ImgResource implements Loadable<ImgResource> {
+    readonly el: HTMLImageElement;
     readonly name: string;
 
     constructor(name: string, url: string) {
-        this.img = new Image();
-        this.img.src = url;
+        this.el = new Image();
+        this.el.src = url;
         this.name = name;
     }
 
     /**
      * Forces the browser to load the image
      */
-    load() {
-        let el = document.createElement("img");
+    load(): Promise<ImgResource> {
+        let p = new Promise<ImgResource>((resolve, _) => {
+            let el = document.createElement("img");
 
-        el.src = this.img.src;
-        el.width = 1;
-        el.height = 1;
-        el.style.position = "absolute";
-        el.style.left = "-9999";
-        el.style.opacity = "0";
+            el.src = this.el.src;
+            el.width = 1;
+            el.height = 1;
+            el.style.position = "absolute";
+            el.style.left = "-9999";
+            el.style.opacity = "0";
 
-        document.body.appendChild(el);
-        document.body.removeChild(el);
+            let earlier = Date.now();
+
+            document.body.appendChild(el).onload = (e) => {
+                console.debug("[preload] loaded img " + this.name + " in " +
+                    (Date.now() - earlier) / 1000 + "sec");
+                resolve(this);
+            };
+            document.body.removeChild(el);
+        });
+
+        return p;
     }
 }
 

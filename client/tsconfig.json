@@ -3,6 +3,11 @@
     "noImplicitAny": true,
     "module": "es6",
     "target": "es5",
+    "lib": [
+      "es2015",
+      "dom",
+      "scripthost"
+    ],
     "allowJs": true
   }
 }

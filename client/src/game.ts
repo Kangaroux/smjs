@@ -1,5 +1,6 @@
 import { Canvas } from "./canvas";
-import { Resource, ImgResource } from "./resource";
+import { Resource, ImgResource, Loadable } from "./resource";
+import { TestScene } from "./scenes/test";
 
 const imgResources: Resource[] = [
     { name: "ArrowUp", url: "/img/arrow.png" },
@@ -9,24 +10,42 @@ const imgResources: Resource[] = [
 
 export class Game {
     readonly canvas: Canvas;
-    readonly images: ImgResource[];
+    readonly images: Record<string, ImgResource>;
 
     constructor(canvas: Canvas) {
         this.canvas = canvas;
-        this.images = [];
+        this.images = {};
     }
 
     run() {
-        this.preload();
+        this.preload().catch(() => {
+            console.error("Failed to load assets");
+        }).then(() => {
+            const fps = 5;
+            let scene = new TestScene(this);
+            let earlier = Date.now();
+
+            setInterval(() => {
+                let delta = Date.now() - earlier;
+
+                // Clear and repaint
+                this.canvas.ctx.clearRect(0, 0, this.canvas.w, this.canvas.h);
+                scene.update(delta);
+            }, 1000.0 / fps);
+        });
     }
 
-    protected preload() {
+    protected preload(): Promise<any> {
+        let promises = [];
+
         // Preload the images
         for (let k of imgResources) {
             let img = new ImgResource(k.name, k.url);
-            img.load();
+            promises.push(img.load());
 
-            this.images.push(img);
+            this.images[img.name] = img;
         }
+
+        return Promise.all(promises);
     }
 }
