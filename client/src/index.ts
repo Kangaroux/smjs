@@ -1,5 +1,10 @@
-import c from "./canvas";
+import { Canvas } from "./canvas";
+import { Game } from "./game";
 
-c.ctx.font = "60px serif";
-c.ctx.fillStyle = "white";
-c.ctx.fillText("Hello, world!", c.w / 2, c.h / 2);
+const WIDTH = 800;
+const HEIGHT = 600;
+let canvasElem = <HTMLCanvasElement>document.getElementById("canvas");
+let canvas = new Canvas(canvasElem, WIDTH, HEIGHT);
+let game = new Game(canvas);
+
+game.run();
