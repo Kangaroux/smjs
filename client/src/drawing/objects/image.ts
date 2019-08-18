@@ -1,17 +1,17 @@
 import { _default } from "../../util/util";
 import { Canvas } from "../../canvas";
-import { Drawable } from "../drawable";
+import { Object } from "../object";
 import { ImgResource as ImgResource } from "../../resource";
 import { Point, Rect } from "../../util/coordinate";
 
 /**
  * A drawable image
  */
-export class Img implements Drawable {
-    rect: Rect;
+export class Img extends Object {
     readonly data: ImgResource;
 
     constructor(img: ImgResource, w?: number, h?: number) {
+        super();
         w = _default(w, img.el.naturalWidth);
         h = _default(h, img.el.naturalHeight);
 
@@ -25,13 +25,5 @@ export class Img implements Drawable {
         offsetY = _default(offsetY, 0);
 
         c.ctx.drawImage(this.data.el, r.x + offsetX, r.y + offsetY, r.w, r.h);
-    }
-
-    getPos(): Point {
-        return this.rect;
-    }
-
-    getRect(): Rect {
-        return this.rect;
     }
 }

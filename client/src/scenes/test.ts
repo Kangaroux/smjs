@@ -1,15 +1,15 @@
 import { Scene } from "../scene";
 import { Img } from "../drawing/objects/image";
 import { Game } from "../game";
-import { DrawableGroup } from "../drawing/drawable";
+import { ObjectGroup } from "../drawing/object";
 
 export class TestScene implements Scene {
     game: Game;
-    imgGroup: DrawableGroup;
+    imgGroup: ObjectGroup;
 
     constructor(game: Game) {
         this.game = game;
-        this.imgGroup = new DrawableGroup([
+        this.imgGroup = new ObjectGroup([
             new Img(game.images["ArrowUp"]),
             new Img(game.images["Receptor"]),
             new Img(game.images["ReceptorGlow"]),
