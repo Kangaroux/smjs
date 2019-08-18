@@ -2,7 +2,6 @@ import { Scene } from "../scene";
 import { Img } from "../drawing/objects/image";
 import { Game } from "../game";
 import { ObjectGroup } from "../drawing/object";
-import { Rect } from "../util/coordinate";
 
 export class TestScene implements Scene {
     game: Game;

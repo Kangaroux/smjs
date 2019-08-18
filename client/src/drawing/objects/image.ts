@@ -2,7 +2,7 @@ import { _default } from "../../util/util";
 import { Canvas } from "../../canvas";
 import { Object2D } from "../object";
 import { ImgResource as ImgResource } from "../../resource";
-import { Point, Rect } from "../../util/coordinate";
+import { Rect } from "../../util/coordinate";
 
 /**
  * A drawable image

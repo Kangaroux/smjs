@@ -1,5 +1,5 @@
 import { Canvas } from "./canvas";
-import { Resource, ImgResource, Loadable } from "./resource";
+import { Resource, ImgResource } from "./resource";
 import { TestScene } from "./scenes/test";
 
 const imgResources: Resource[] = [
