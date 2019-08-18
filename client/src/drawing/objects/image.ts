@@ -1,13 +1,13 @@
 import { _default } from "../../util/util";
 import { Canvas } from "../../canvas";
-import { Object } from "../object";
+import { Object2D } from "../object";
 import { ImgResource as ImgResource } from "../../resource";
 import { Point, Rect } from "../../util/coordinate";
 
 /**
  * A drawable image
  */
-export class Img extends Object {
+export class Img extends Object2D {
     readonly data: ImgResource;
 
     constructor(img: ImgResource, w?: number, h?: number) {

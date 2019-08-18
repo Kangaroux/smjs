@@ -1,3 +1,5 @@
+import { Style } from "./drawing/property";
+
 /**
  * The 2D surface the game is drawn to
  */
@@ -12,5 +14,24 @@ export class Canvas {
         this.ctx = canvas.getContext("2d", { alpha: false });
         this.w = w;
         this.h = h;
+    }
+
+    /**
+     * Applies styles to the drawing context
+     */
+    apply(...props: Style[]) {
+        // Push the current style props onto the stack
+        this.ctx.save();
+
+        props.forEach((p) => {
+            p.apply(this);
+        })
+    }
+
+    /**
+     * Restores the style settings on the drawing context
+     */
+    restore() {
+        this.ctx.restore();
     }
 }
