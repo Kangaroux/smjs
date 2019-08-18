@@ -13,6 +13,7 @@ build-client:
 	docker build -t kangaroux/smjs/client client/
 	-mkdir nginx/tmp
 	docker run --mount type=bind,src=`pwd`/nginx/tmp/,dst=/app/tmp/ kangaroux/smjs/client cp /build/app.js /app/tmp
+	docker run --mount type=bind,src=`pwd`/nginx/tmp/,dst=/app/tmp/ kangaroux/smjs/client cp -R /app/img/ /app/tmp/img
 
 build-nginx:
 	docker-compose build nginx
