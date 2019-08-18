@@ -1,1 +1,4 @@
+!.gitignore
+
+nginx/tmp/*
 node_modules/
