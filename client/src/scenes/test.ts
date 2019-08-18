@@ -2,6 +2,7 @@ import { Scene } from "../scene";
 import { Img } from "../drawing/objects/image";
 import { Game } from "../game";
 import { ObjectGroup } from "../drawing/object";
+import { Rect } from "../util/coordinate";
 
 export class TestScene implements Scene {
     game: Game;
@@ -17,12 +18,12 @@ export class TestScene implements Scene {
 
         let nextX = 0;
 
-        for (let i = 0; i < this.imgGroup.length; i++) {
-            let rect = this.imgGroup.items[i].getRect();
+        this.imgGroup.items.forEach((k) => {
+            let rect = k.getRect();
 
             rect.x = nextX;
             nextX += rect.w;
-        }
+        });
     }
 
     update(deltaTime: number) {
