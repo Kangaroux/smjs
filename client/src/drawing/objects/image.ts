@@ -19,11 +19,7 @@ export class Img extends Object2D {
         this.data = img;
     }
 
-    draw(c: Canvas, offsetX?: number, offsetY?: number): void {
-        const r = this.rect;
-        offsetX = _default(offsetX, 0);
-        offsetY = _default(offsetY, 0);
-
-        c.ctx.drawImage(this.data.el, r.x + offsetX, r.y + offsetY, r.w, r.h);
+    draw(c: Canvas, x: number, y: number): void {
+        c.ctx.drawImage(this.data.el, x, y, this.rect.w, this.rect.h);
     }
 }

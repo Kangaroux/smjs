@@ -1,15 +1,16 @@
 import { Scene } from "../scene";
 import { Img } from "../drawing/objects/image";
 import { Game } from "../game";
-import { ObjectGroup } from "../drawing/object";
+import { DrawableGroup } from "../drawing/object";
 
-export class TestScene implements Scene {
-    game: Game;
-    imgGroup: ObjectGroup;
+export class TestScene extends Scene {
+    imgGroup: DrawableGroup;
 
     constructor(game: Game) {
+        super();
+
         this.game = game;
-        this.imgGroup = new ObjectGroup([
+        this.imgGroup = new DrawableGroup([
             new Img(game.images["ArrowUp"]),
             new Img(game.images["Receptor"]),
             new Img(game.images["ReceptorGlow"]),
@@ -23,14 +24,7 @@ export class TestScene implements Scene {
             rect.x = nextX;
             nextX += rect.w;
         });
-    }
 
-    update(deltaTime: number) {
-        let pos = this.imgGroup.getPos();
-        pos.x += (300 * deltaTime / 1000.0);
-
-        if (pos.x > 300) pos.x = 0;
-
-        this.imgGroup.draw(this.game.canvas);
+        this.layers.push(this.imgGroup);
     }
 }

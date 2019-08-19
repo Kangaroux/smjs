@@ -15,19 +15,15 @@ export class Rectangle extends Object2D {
         this.rect = new Rect(x, y, w, h);
     }
 
-    draw(c: Canvas, offsetX?: number, offsetY?: number) {
-        const r = this.rect;
-        offsetX = _default(offsetX, 0);
-        offsetY = _default(offsetY, 0);
-
+    _draw(c: Canvas, x: number, y: number) {
         c.apply(this.color);
-        c.ctx.fillRect(r.x, r.y, r.w, r.h);
+        c.ctx.fillRect(x, y, this.rect.w, this.rect.h);
 
         if (this.stroke != null) {
             // Apply this style directly instead of using Canvas.apply so we don't have
             // to call Canvas.restore twice
             this.stroke.apply(c);
-            c.ctx.strokeRect(r.x, r.y, r.w, r.h);
+            c.ctx.strokeRect(x, y, this.rect.w, this.rect.h);
         }
 
         c.restore();

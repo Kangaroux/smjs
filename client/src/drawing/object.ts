@@ -1,9 +1,15 @@
 import { Canvas } from "../canvas";
+import { Entity } from "../entities/entity";
 import { Point, Rect } from "../util/coordinate";
 import { _default } from "../util/util";
 
-export abstract class Object2D {
-    parent: Object2D;
+export interface Drawable {
+    hide: boolean;
+    draw(c: Canvas, offsetX: number, offsetY: number): void;
+}
+
+export abstract class Object2D implements Drawable {
+    hide: boolean;
     rect: Rect;
 
     constructor(x?: number, y?: number, w?: number, h?: number) {
@@ -12,12 +18,20 @@ export abstract class Object2D {
         w = _default(w, 0);
         h = _default(h, 0);
 
-        this.parent = null;
+        this.hide = false;
         this.rect = new Rect(x, y, w, h);
     }
 
-    draw(c: Canvas, offsetX?: number, offsetY?: number) {
-        throw new Error("not implemented");
+    /**
+     * Method that handles the actual drawing logic. The (x, y) coords should be used
+     * since they take into account offsets from the parent
+     */
+    abstract _draw(c: Canvas, x: number, y: number): void;
+
+    draw(c: Canvas, offsetX: number, offsetY: number) {
+        if (this.hide) return;
+
+        this._draw(c, this.rect.x + offsetX, this.rect.y + offsetY);
     }
 
     getPos(): Point {
@@ -27,31 +41,24 @@ export abstract class Object2D {
     getRect(): Rect {
         return this.rect;
     }
-
-    moveTo(p: Point) {
-        this.rect.x = p.x;
-        this.rect.y = p.y;
-    }
 }
 
-export class ObjectGroup extends Object2D {
-    items: Array<Object2D>;
+export class DrawableGroup implements Drawable {
+    hide: boolean;
+    items: Array<Drawable>;
 
-    constructor(items?: Object2D[]) {
-        super();
-
-        this.items = [];
-        items = _default(items, []);
-        items.forEach((k) => this.add(k));
+    constructor(items?: Drawable[]) {
+        this.items = _default(items, []);
     }
 
-    add(o: Object2D) {
-        o.parent = this;
+    add(o: Drawable) {
         this.items.push(o);
     }
 
-    draw(c: Canvas, offsetX?: number, offsetY?: number) {
-        this.items.forEach((k) => k.draw(c, this.rect.x, this.rect.y));
+    draw(c: Canvas, x: number, y: number) {
+        if (this.hide) return;
+
+        this.items.forEach((k) => k.draw(c, x, y));
     }
 
     get length(): number {

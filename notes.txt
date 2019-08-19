@@ -1,0 +1,59 @@
+DOM events:
+    - Captured by the Game instance
+    - Sent to the current scene
+    - Events are propagated through the layers, front-to-back
+    - Events that are handled should be consumed so they don't continue propagating
+
+Game events:
+    - Published to an event dispatcher on the Game instance
+    - Anything can listen to the events
+    - Events cannot be consumed/stopped
+
+
+
+
+
+- Static screen elements                            DRAWABLE
+- Dynamic/interactive screen elements               DRAWABLE+LOGIC
+- Hidden behind the scenes game logic               LOGIC
+
+
+
+
+
+Drawables
+    - Primitive object
+    - Hierarchy of primitives grouped together
+
+Interactive elements need:                  Actor?
+    - To be able to draw (optional)
+    - To be able to handle events (optional)
+
+            Entity
+              ^
+              |
+            Actor
+        /           \
+    primitives/   game logic/
+     drawables      interactive
+
+
+GOAL: Scene with entities that get updated every frame.
+"update" can mean drawing, logic, or both
+
+
+
+Entity -> has an update() method
+    - Can be inserted into scenes
+    - "update" can mean game logic, or drawing, or both
+    - satisfies both logical entities and drawable entities
+    - Context?
+        - Current scene? issues with changing scenes, sharing entities across scenes
+
+Drawable -> has a draw() method
+
+EventHandler -> has a handleEvent() method
+
+Actor is an Entity which implements Drawable, EventHandler
+
+Component is an Actor with an object group
