@@ -1,0 +1,19 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "interface-over-type-literal": false,
+        "member-access": false,
+        "member-ordering": false,
+        "no-empty": false,
+        "semicolon": true,
+        "no-angle-bracket-type-assertion": false,
+        "whitespace": false,
+        "no-console": false,
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "any"
+            }
+        ]
+    }
+}

@@ -25,7 +25,7 @@ export class Canvas {
 
         props.forEach((p) => {
             p.apply(this);
-        })
+        });
     }
 
     /**

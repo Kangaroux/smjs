@@ -9,7 +9,6 @@
       "es2015",
       "dom",
       "scripthost"
-    ],
-    "allowJs": true
+    ]
   }
 }
