@@ -1,7 +1,7 @@
+import { Canvas } from "../../canvas";
 import { Color } from "./color";
 import { LineStyle } from "./lineStyle";
-import { Style } from "../property";
-import { Canvas } from "../../canvas";
+import { Style } from "../../types";
 
 export class Stroke implements Style {
     color: Color;

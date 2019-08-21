@@ -1,4 +1,4 @@
-import { Style } from "./drawing/property";
+import { Style } from "./types";
 
 /**
  * The 2D surface the game is drawn to

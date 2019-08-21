@@ -1,11 +1,3 @@
-/**
- * Returns the provided default if the value is undefined, otherwise returns
- * the value
- */
-export function _default(val: any, def: any): any {
-    return (val === undefined) ? def : val;
-}
-
 export function clamp(val: number, min: number, max: number) {
     return (val < min) ? min : (val > max) ? max : val;
 }

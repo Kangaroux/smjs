@@ -32,7 +32,7 @@ export class ImgResource implements Loadable<ImgResource> {
 
             let earlier = Date.now();
 
-            document.body.appendChild(el).onload = (e) => {
+            document.body.appendChild(el).onload = () => {
                 console.debug("[preload] loaded img " + this.name + " in " +
                     (Date.now() - earlier) / 1000 + "sec");
                 resolve(this);
@@ -43,8 +43,3 @@ export class ImgResource implements Loadable<ImgResource> {
         return p;
     }
 }
-
-export type Resource = {
-    name: string,
-    url: string,
-};

@@ -2,7 +2,6 @@ import { Rect } from "../../util/coordinate";
 import { Object2D } from "../object";
 import { Color } from "../styles/color";
 import { Canvas } from "../../canvas";
-import { _default } from "../../util/util";
 import { Stroke } from "../styles/stroke";
 
 export class Rectangle extends Object2D {
@@ -10,7 +9,7 @@ export class Rectangle extends Object2D {
     stroke: Stroke;
 
     constructor(x: number, y: number, w: number, h: number, color?: Color) {
-        super();
+        super(x, y, w, h);
         this.color = color || Color.WHITE;
         this.rect = new Rect(x, y, w, h);
     }

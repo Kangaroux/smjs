@@ -1,6 +1,6 @@
-import { clamp, _default, rgbToHex } from "../../util/util";
-import { Style } from "../property";
 import { Canvas } from "../../canvas";
+import { clamp, rgbToHex } from "../../util/util";
+import { Style } from "../../types";
 
 export class Color implements Style {
     static readonly WHITE = new Color(255, 255, 255);
@@ -21,7 +21,7 @@ export class Color implements Style {
         this.r = r;
         this.g = g;
         this.b = b;
-        this.a = _default(a, 0);
+        this.a = (a === undefined) ? 255 : a;
     }
 
     /**

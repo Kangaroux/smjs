@@ -1,5 +1,5 @@
-import { Style } from "../property";
 import { Canvas } from "../../canvas";
+import { Style } from "../../types";
 
 export const enum LineCap {
     BUTT = "butt",

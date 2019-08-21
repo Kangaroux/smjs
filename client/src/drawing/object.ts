@@ -1,23 +1,12 @@
 import { Canvas } from "../canvas";
-import { Entity } from "../entities/entity";
+import { Drawable } from "../types";
 import { Point, Rect } from "../util/coordinate";
-import { _default } from "../util/util";
-
-export interface Drawable {
-    hide: boolean;
-    draw(c: Canvas, offsetX: number, offsetY: number): void;
-}
 
 export abstract class Object2D implements Drawable {
     hide: boolean;
     rect: Rect;
 
-    constructor(x?: number, y?: number, w?: number, h?: number) {
-        x = _default(x, 0);
-        y = _default(y, 0);
-        w = _default(w, 0);
-        h = _default(h, 0);
-
+    constructor(x: number, y: number, w: number, h: number) {
         this.hide = false;
         this.rect = new Rect(x, y, w, h);
     }
@@ -45,23 +34,25 @@ export abstract class Object2D implements Drawable {
 
 export class DrawableGroup implements Drawable {
     hide: boolean;
-    items: Array<Drawable>;
+    objects: Array<Drawable>;
+    point: Point;
 
-    constructor(items?: Drawable[]) {
-        this.items = _default(items, []);
+    constructor(x: number, y: number, objects?: Drawable[]) {
+        this.objects = objects || [];
+        this.point = new Point(x, y);
     }
 
     add(o: Drawable) {
-        this.items.push(o);
+        this.objects.push(o);
     }
 
     draw(c: Canvas, x: number, y: number) {
         if (this.hide) return;
 
-        this.items.forEach((k) => k.draw(c, x, y));
+        this.objects.forEach((k) => k.draw(c, x + this.point.x, y + this.point.y));
     }
 
     get length(): number {
-        return this.items.length;
+        return this.objects.length;
     }
 }
