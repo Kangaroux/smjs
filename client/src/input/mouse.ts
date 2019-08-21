@@ -1,5 +1,5 @@
 import { Point } from "../drawing/point";
-import { Cloneable } from "../types";
+import { ICloneable } from "../interfaces";
 
 export enum MouseButtons {
     LEFT = 0,
@@ -9,7 +9,7 @@ export enum MouseButtons {
     FORWARD,
 }
 
-export class Mouse implements Cloneable<Mouse> {
+export class Mouse implements ICloneable<Mouse> {
     private buttons: Record<number, boolean>;
     private position: Point;
 

@@ -1,9 +1,9 @@
 import { Canvas } from "../../canvas";
 import { Color } from "./color";
 import { LineStyle } from "./lineStyle";
-import { Style } from "../../types";
+import { IStyle } from "../../interfaces";
 
-export class Stroke implements Style {
+export class Stroke implements IStyle {
     color: Color;
     lineStyle: LineStyle;
     width: number;

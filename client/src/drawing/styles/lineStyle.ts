@@ -1,21 +1,21 @@
 import { Canvas } from "../../canvas";
-import { Style } from "../../types";
+import { IStyle } from "../../interfaces";
 
-export const enum LineCap {
+export enum LineCap {
     BUTT = "butt",
     ROUND = "round",
-    SQUARE = "square"
+    SQUARE = "square",
 }
 
-export const enum LineJoin {
+export enum LineJoin {
     BEVEL = "bevel",
     ROUND = "round",
-    MITER = "miter"
+    MITER = "miter",
 }
 
-export class LineStyle implements Style {
-    cap: LineCap
-    join: LineJoin
+export class LineStyle implements IStyle {
+    cap: LineCap;
+    join: LineJoin;
 
     constructor(cap?: LineCap, join?: LineJoin) {
         this.cap = cap;

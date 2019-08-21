@@ -1,8 +1,8 @@
 import { Canvas } from "../../canvas";
 import { clamp, rgbToHex } from "../../util/util";
-import { Style } from "../../types";
+import { IStyle } from "../../interfaces";
 
-export class Color implements Style {
+export class Color implements IStyle {
     static readonly WHITE = new Color(255, 255, 255);
     static readonly BLACK = new Color(0, 0, 0);
     static readonly RED = new Color(255, 0, 0);

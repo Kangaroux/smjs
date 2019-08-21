@@ -1,6 +1,6 @@
-import { Cloneable } from "../types";
+import { ICloneable } from "../interfaces";
 
-export class Keyboard implements Cloneable<Keyboard> {
+export class Keyboard implements ICloneable<Keyboard> {
     private keys: Record<string, boolean>;
 
     public clone(): Keyboard {

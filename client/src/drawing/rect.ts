@@ -1,4 +1,7 @@
-export class Rect extends Point implements Cloneable<Rect> {
+import { ICloneable } from "../interfaces";
+import { Point } from "./point";
+
+export class Rect extends Point implements ICloneable<Rect> {
     w: number;
     h: number;
 

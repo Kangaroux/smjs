@@ -1,15 +1,15 @@
 import { Canvas } from "../../canvas";
-import { ImgResource } from "../../resource";
+import { ImageResource } from "../../resource/image";
 import { Object2D } from "../object";
-import { Rect } from "../../util/coordinate";
+import { Rect } from "../../drawing/rect";
 
 /**
  * A drawable image
  */
 export class Img extends Object2D {
-    readonly data: ImgResource;
+    readonly data: ImageResource;
 
-    constructor(img: ImgResource, w?: number, h?: number) {
+    constructor(img: ImageResource, w?: number, h?: number) {
         w = (w === undefined) ? img.el.naturalWidth : w;
         h = (h === undefined) ? img.el.naturalHeight : h;
 

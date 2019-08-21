@@ -6,24 +6,13 @@ import { Canvas } from "./canvas";
 //
 ///////////////////////////////////////////////////////////
 
-export interface Drawable {
+export interface IDrawable {
     draw(c: Canvas, offsetX: number, offsetY: number): void;
 }
 
-export interface Style {
+export interface IStyle {
     apply(c: Canvas): void;
 }
-
-///////////////////////////////////////////////////////////
-//
-//                        Resources
-//
-///////////////////////////////////////////////////////////
-
-export type Resource = {
-    name: string,
-    url: string,
-};
 
 ///////////////////////////////////////////////////////////
 //
@@ -31,20 +20,12 @@ export type Resource = {
 //
 ///////////////////////////////////////////////////////////
 
-export abstract class Actor implements Drawable, Entity {
-    hide: boolean;
-    parent: Entity;
-
-    draw(c: Canvas, offsetX: number, offsetY: number): void { }
-    update(deltaTime: number): void { }
-}
-
-export interface Entity extends Updateable { }
+export type IEntity = IUpdateable;
 
 /**
  * Interface for an object that can be updated every frame
  */
-export interface Updateable {
+export interface IUpdateable {
     update(deltaTime: number): void;
 }
 
@@ -54,6 +35,6 @@ export interface Updateable {
 //
 ///////////////////////////////////////////////////////////
 
-export interface Cloneable<T> {
+export interface ICloneable<T> {
     clone(): T;
 }

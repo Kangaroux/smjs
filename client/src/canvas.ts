@@ -1,4 +1,4 @@
-import { Style } from "./types";
+import { IStyle } from "./interfaces";
 
 /**
  * The 2D surface the game is drawn to
@@ -19,7 +19,7 @@ export class Canvas {
     /**
      * Applies styles to the drawing context
      */
-    apply(...props: Style[]) {
+    apply(...props: IStyle[]) {
         // Push the current style props onto the stack
         this.ctx.save();
 

@@ -3,8 +3,8 @@ import { Game } from "./game";
 
 const WIDTH = 800;
 const HEIGHT = 600;
-let canvasElem = <HTMLCanvasElement>document.getElementById("canvas");
-let canvas = new Canvas(canvasElem, WIDTH, HEIGHT);
-let game = new Game(canvas, 60.0);
+const canvasElem = <HTMLCanvasElement>document.getElementById("canvas");
+const canvas = new Canvas(canvasElem, WIDTH, HEIGHT);
+const game = new Game(canvas, 60.0);
 
 game.run();

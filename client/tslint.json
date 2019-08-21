@@ -9,6 +9,7 @@
         "no-angle-bracket-type-assertion": false,
         "whitespace": false,
         "no-console": false,
+        "variable-name": false,
         "ordered-imports": [
             true,
             {

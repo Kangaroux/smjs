@@ -1,11 +1,12 @@
-import { Actor, Drawable } from "../../types";
-import { DrawableGroup } from "../../drawing/object";
+import { Actor } from "../actor";
+import { IDrawable } from "../../interfaces";
+import { DrawableGroup } from "../../drawing/group";
 import { Canvas } from "../../canvas";
 
 export class GraphicActor extends Actor {
     group: DrawableGroup;
 
-    constructor(x: number, y: number, ...objects: Drawable[]) {
+    constructor(x: number, y: number, ...objects: IDrawable[]) {
         super();
 
         this.group = new DrawableGroup(x, y, objects);

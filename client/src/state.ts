@@ -1,7 +1,8 @@
-import { Cloneable } from "./util/cloneable";
-import { Keyboard, Mouse } from "./input";
+import { ICloneable } from "./interfaces";
+import { Keyboard } from "./input/keyboard";
+import { Mouse } from "./input/mouse";
 
-export class GameState implements Cloneable<GameState> {
+export class GameState implements ICloneable<GameState> {
     readonly keyboard: Keyboard;
     readonly mouse: Mouse;
 

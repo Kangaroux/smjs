@@ -1,8 +1,9 @@
 import { Canvas } from "../canvas";
-import { Drawable } from "../types";
-import { Point, Rect } from "../util/coordinate";
+import { IDrawable } from "../interfaces";
+import { Point } from "./point";
+import { Rect } from "./rect";
 
-export abstract class Object2D implements Drawable {
+export abstract class Object2D implements IDrawable {
     hide: boolean;
     rect: Rect;
 
@@ -18,7 +19,9 @@ export abstract class Object2D implements Drawable {
     abstract _draw(c: Canvas, x: number, y: number): void;
 
     draw(c: Canvas, offsetX: number, offsetY: number) {
-        if (this.hide) return;
+        if (this.hide) {
+            return;
+        }
 
         this._draw(c, this.rect.x + offsetX, this.rect.y + offsetY);
     }
@@ -29,30 +32,5 @@ export abstract class Object2D implements Drawable {
 
     getRect(): Rect {
         return this.rect;
-    }
-}
-
-export class DrawableGroup implements Drawable {
-    hide: boolean;
-    objects: Array<Drawable>;
-    point: Point;
-
-    constructor(x: number, y: number, objects?: Drawable[]) {
-        this.objects = objects || [];
-        this.point = new Point(x, y);
-    }
-
-    add(o: Drawable) {
-        this.objects.push(o);
-    }
-
-    draw(c: Canvas, x: number, y: number) {
-        if (this.hide) return;
-
-        this.objects.forEach((k) => k.draw(c, x + this.point.x, y + this.point.y));
-    }
-
-    get length(): number {
-        return this.objects.length;
     }
 }

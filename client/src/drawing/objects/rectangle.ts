@@ -1,11 +1,11 @@
-import { Rect } from "../../util/coordinate";
+import { Rect } from "../rect";
 import { Object2D } from "../object";
 import { Color } from "../styles/color";
 import { Canvas } from "../../canvas";
 import { Stroke } from "../styles/stroke";
 
 export class Rectangle extends Object2D {
-    color: Color
+    color: Color;
     stroke: Stroke;
 
     constructor(x: number, y: number, w: number, h: number, color?: Color) {

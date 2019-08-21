@@ -2,7 +2,7 @@ import { Scene } from "../scene";
 import { Img } from "../drawing/objects/image";
 import { Game } from "../game";
 import { Object2D } from "../drawing/object";
-import { GraphicActor } from "../entities/actors/graphicActor";
+import { GraphicActor } from "../entity/actors/graphicActor";
 
 export class TestScene extends Scene {
     images: GraphicActor;
@@ -12,15 +12,15 @@ export class TestScene extends Scene {
 
         this.game = game;
         this.images = new GraphicActor(0, 0,
-            new Img(game.images["ArrowUp"]),
-            new Img(game.images["Receptor"]),
-            new Img(game.images["ReceptorGlow"]),
+            new Img(game.images.ArrowUp),
+            new Img(game.images.Receptor),
+            new Img(game.images.ReceptorGlow),
         );
 
         let nextX = 0;
 
         this.images.group.objects.forEach((k) => {
-            let rect = (<Object2D>k).getRect();
+            const rect = (<Object2D>k).getRect();
 
             rect.x = nextX;
             nextX += rect.w;
