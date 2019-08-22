@@ -14,9 +14,9 @@ export class TestScene extends Scene {
 
     create() {
         this.images = new GraphicActor(0, 0,
-            new Img(this.game.images.ArrowUp),
-            new Img(this.game.images.Receptor),
-            new Img(this.game.images.ReceptorGlow),
+            new Img(this.game.resc.images.ArrowUp),
+            new Img(this.game.resc.images.Receptor),
+            new Img(this.game.resc.images.ReceptorGlow),
         );
 
         let nextX = 0;

@@ -1,16 +1,9 @@
-type URLResource = {
-    name: string;
-    url: string;
-};
+import { ImageResource } from "./resource/image";
 
-type ResourceList = {
-    images: URLResource[];
-};
-
-export default <ResourceList>{
-    images: [
-        { name: "ArrowUp", url: "/img/arrow.png" },
-        { name: "Receptor", url: "/img/receptor.png" },
-        { name: "ReceptorGlow", url: "/img/receptor_glow.png" },
-    ],
+export const ResourceList = {
+    images: {
+        ArrowUp: new ImageResource("ArrowUp", "/img/arrow.png"),
+        Receptor: new ImageResource("Receptor", "/img/receptor.png"),
+        ReceptorGlow: new ImageResource("ReceptorGlow", "/img/receptor_glow.png"),
+    },
 };

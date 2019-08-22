@@ -1,17 +1,16 @@
 import { Canvas } from "./canvas";
 import { GameState } from "./state";
-import { ImageResource } from "./resource/image";
 import { Mouse } from "./input/mouse";
 import { Point } from "./drawing/point";
 import { Scene } from "./scene";
 import { TestScene } from "./scenes/test";
-import Resources from "./resources";
+import { ResourceList } from "./resources";
+import { IResource } from "./resource/resource";
 
 export class Game {
     readonly canvas: Canvas;
     readonly fps: number;
-
-    readonly images: Record<string, ImageResource>;
+    readonly resc = ResourceList;
 
     lastFrameUpdate: number;
     prevState: GameState;
@@ -23,7 +22,6 @@ export class Game {
     constructor(canvas: Canvas, fps: number) {
         this.canvas = canvas;
         this.eventBuffer = [];
-        this.images = {};
         this.fps = fps;
         this.state = new GameState();
     }
@@ -67,16 +65,12 @@ export class Game {
         }
     }
 
-    preload(): Promise<any> {
-        const promises = [];
+    preload(): Promise<IResource[]> {
+        const promises: Array<Promise<IResource>> = [];
 
-        // Preload the images
-        for (const k of Resources.images) {
-            const img = new ImageResource(k.name, k.url);
-            promises.push(img.load());
-
-            this.images[img.name] = img;
-        }
+        promises.push(this.resc.images.ArrowUp.load());
+        promises.push(this.resc.images.Receptor.load());
+        promises.push(this.resc.images.ReceptorGlow.load());
 
         return Promise.all(promises);
     }
