@@ -25,6 +25,7 @@ export class Game {
         this.eventBuffer = [];
         this.images = {};
         this.fps = fps;
+        this.state = new GameState();
     }
 
     appendEventBuffer(e: Event) {
@@ -32,11 +33,11 @@ export class Game {
     }
 
     attachEventListeners() {
-        document.body.addEventListener("keydown", this.appendEventBuffer);
-        document.body.addEventListener("keyup", this.appendEventBuffer);
-        document.body.addEventListener("mousedown", this.appendEventBuffer);
-        document.body.addEventListener("mouseup", this.appendEventBuffer);
-        document.body.addEventListener("mousemove", this.appendEventBuffer);
+        document.body.addEventListener("keydown", (e) => this.appendEventBuffer(e));
+        document.body.addEventListener("keyup", (e) => this.appendEventBuffer(e));
+        document.body.addEventListener("mousedown", (e) => this.appendEventBuffer(e));
+        document.body.addEventListener("mouseup", (e) => this.appendEventBuffer(e));
+        document.body.addEventListener("mousemove", (e) => this.appendEventBuffer(e));
     }
 
     handleEvent(e: Event) {
@@ -88,7 +89,7 @@ export class Game {
 
             this.scene = new TestScene(this);
             this.lastFrameUpdate = Date.now();
-            setInterval(this.update, 1000.0 / this.fps);
+            setInterval(() => this.update(), 1000.0 / this.fps);
         });
     }
 

@@ -1,5 +1,6 @@
 module.exports = {
   entry: "./src/index",
+  devtool: "eval-source-map",
   module: {
     rules: [
       {

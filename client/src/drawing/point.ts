@@ -1,5 +1,4 @@
 import { ICloneable } from "../interfaces";
-import { Rect } from "./rect";
 
 export class Point implements ICloneable<Point> {
     x: number;
@@ -28,13 +27,6 @@ export class Point implements ICloneable<Point> {
         this.y += y;
 
         return this;
-    }
-
-    /**
-     * Returns a rect at this point with zero width and height
-     */
-    asRect(): Rect {
-        return new Rect(this.x, this.y, 0, 0);
     }
 
     /**

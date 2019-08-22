@@ -6,7 +6,8 @@ export abstract class Scene implements IUpdateable {
     game: Game;
     layers: Actor[];
 
-    constructor() {
+    constructor(game: Game) {
+        this.game = game;
         this.layers = [];
     }
 

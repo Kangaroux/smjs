@@ -3,6 +3,10 @@ import { ICloneable } from "../interfaces";
 export class Keyboard implements ICloneable<Keyboard> {
     private keys: Record<string, boolean>;
 
+    constructor() {
+        this.keys = {};
+    }
+
     public clone(): Keyboard {
         const newKeyboard = new Keyboard();
         newKeyboard.keys = Object.assign({}, this.keys);

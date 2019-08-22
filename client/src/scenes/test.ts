@@ -8,13 +8,15 @@ export class TestScene extends Scene {
     images: GraphicActor;
 
     constructor(game: Game) {
-        super();
+        super(game);
+        this.create();
+    }
 
-        this.game = game;
+    create() {
         this.images = new GraphicActor(0, 0,
-            new Img(game.images.ArrowUp),
-            new Img(game.images.Receptor),
-            new Img(game.images.ReceptorGlow),
+            new Img(this.game.images.ArrowUp),
+            new Img(this.game.images.Receptor),
+            new Img(this.game.images.ReceptorGlow),
         );
 
         let nextX = 0;

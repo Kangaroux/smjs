@@ -13,6 +13,11 @@ export class Mouse implements ICloneable<Mouse> {
     private buttons: Record<number, boolean>;
     private position: Point;
 
+    constructor() {
+        this.buttons = {};
+        this.position = new Point(0, 0);
+    }
+
     static convertButtonFromEvent(button: number): MouseButtons {
         switch (button) {
             case 0:

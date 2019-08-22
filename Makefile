@@ -1,3 +1,6 @@
+# Note: Run `make build -e MODE=production` to use production settings
+MODE = development
+
 .PHONY: nginx server
 
 default: nginx server
@@ -10,7 +13,7 @@ stop:
 # The nginx image will then bind to the tmp dir and copy those files in. This way
 # the client and nginx build steps can be independent which simplifies the docker config
 build-client:
-	docker build -t kangaroux/smjs/client client/
+	docker build -t kangaroux/smjs/client client/ --build-arg WEBPACK_MODE=${MODE}
 	-mkdir nginx/tmp
 	docker run --mount type=bind,src=`pwd`/nginx/tmp/,dst=/app/tmp/ kangaroux/smjs/client cp /build/app.js /app/tmp
 	docker run --mount type=bind,src=`pwd`/nginx/tmp/,dst=/app/tmp/ kangaroux/smjs/client cp -R /app/img/ /app/tmp/img
