@@ -10,6 +10,7 @@
         "whitespace": false,
         "no-console": false,
         "variable-name": false,
+        "comment-format": false,
         "ordered-imports": [
             true,
             {

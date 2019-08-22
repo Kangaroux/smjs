@@ -31,11 +31,11 @@ export class Game {
     }
 
     attachEventListeners() {
-        document.body.addEventListener("keydown", (e) => this.appendEventBuffer(e));
-        document.body.addEventListener("keyup", (e) => this.appendEventBuffer(e));
-        document.body.addEventListener("mousedown", (e) => this.appendEventBuffer(e));
-        document.body.addEventListener("mouseup", (e) => this.appendEventBuffer(e));
-        document.body.addEventListener("mousemove", (e) => this.appendEventBuffer(e));
+        this.canvas.canvas.addEventListener("keydown", (e) => this.appendEventBuffer(e));
+        this.canvas.canvas.addEventListener("keyup", (e) => this.appendEventBuffer(e));
+        this.canvas.canvas.addEventListener("mousedown", (e) => this.appendEventBuffer(e));
+        this.canvas.canvas.addEventListener("mouseup", (e) => this.appendEventBuffer(e));
+        this.canvas.canvas.addEventListener("mousemove", (e) => this.appendEventBuffer(e));
     }
 
     handleEvent(e: Event) {
@@ -56,12 +56,15 @@ export class Game {
                 break;
             case "mousemove":
                 const event = <MouseEvent>e;
-                const canvasPos = new Point(
-                    this.canvas.canvas.clientLeft,
-                    this.canvas.canvas.clientTop,
+                const rect = this.canvas.canvas.getBoundingClientRect();
+
+                // Gets the mouse position in the canvas
+                const position = new Point(
+                    event.x - rect.left,
+                    event.y - rect.top,
                 );
 
-                this.state.mouse.setPosition(canvasPos.add(event.x, event.y));
+                this.state.mouse.setPosition(position);
         }
     }
 
@@ -76,6 +79,7 @@ export class Game {
     }
 
     run() {
+        console.log(this.canvas.canvas);
         this.preload().catch(() => {
             console.error("Failed to load assets");
         }).then(() => {
